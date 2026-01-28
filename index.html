@@ -17,29 +17,58 @@
       margin: 0 auto;
       padding: 48px 20px;
       background-color: #fff;
-    }
+    
+  opacity: 0;
+  animation: pageFadeIn 520ms ease-out forwards;
+}
 
-    .container { text-align: left; }
+ pageFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+    .container {
+  text-align: center;
+}
+
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
 
     .logo {
-      max-width: 220px;
+  max-width: 253px;
       margin-bottom: 40px;
       display: block;
-    }
+    
+  margin-left: auto;
+  margin-right: auto;
+}
 
     h1 {
-      font-size: 2.5rem;
+  font-size: 2.5rem;
       color: #111;
       margin-bottom: 20px;
       font-weight: 700;
       letter-spacing: -0.02em;
-    }
+    
+  margin-top: 6px;
+  line-height: 1.05;
+}
+
 
     .lead {
-      font-size: 1.25rem;
+  font-size: 1.25rem;
       color: #555;
       margin-bottom: 32px;
-    }
+    
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 780px;
+}
+
 
     .content p {
       margin-bottom: 20px;
@@ -147,9 +176,12 @@
 
     @media (max-width: 600px) {
   .logo {
-    max-width: 180px;
+  max-width: 207px;
     margin-bottom: 32px;
-  }
+  
+  margin-left: auto;
+  margin-right: auto;
+}
 }
     }
   </style>
