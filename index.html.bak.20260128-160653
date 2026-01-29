@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>QtoC | Accelerating Quote-to-Cash</title>
+  <meta name="description" content="QtoC is a focused consultancy bringing structure and clarity to quote-to-cash commercial and operational complexity." />
+
+  <style>
+    :root{
+      --text: #111;
+      --muted: #555;
+      --border: #eee;
+      --bg: #fff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --shadowHover: 0 14px 40px rgba(0,0,0,0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Safe fade-in (no "blank page" risk) */
+    body {
+      animation: pageFadeIn 520ms ease-out both;
+    }
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none !important; }
+      .btn { transition: none !important; }
+      .sticky-cta { transition: none !important; }
+    }
+
+    /* Layout */
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 56px 22px 36px;
+    }
+
+    /* Center-align logo + hero block */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Logo +15% larger (responsive) */
+    .logo {
+      width: min(265px, 74vw); /* increased */
+      height: auto;
+      display: block;
+      margin: 6px 0 26px;
+    }
+
+    h1 {
+      margin: 0 0 16px;              /* slightly tighter */
+      font-size: clamp(2.05rem, 4.6vw, 3.05rem);
+      font-weight: 750;
+      letter-spacing: -0.03em;
+      line-height: 1.06;             /* tightened */
+    }
+
+    .lead {
+      margin: 0 auto 18px;
+      max-width: 54ch;
+      font-size: 1.18rem;
+      color: var(--muted);
+    }
+
+    .content {
+      max-width: 70ch;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .content p {
+      margin: 0 0 16px;
+      font-size: 1.08rem;
+      color: #333;
+    }
+
+    /* Shared CTA button style (both CTAs identical) */
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+      box-shadow: var(--shadow);
+      transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+      will-change: transform;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      transform: translateY(-1px);
+      box-shadow: var(--shadowHover);
+      outline: none;
+    }
+
+    .btn:active {
+      transform: translateY(0px);
+      opacity: 0.96;
+    }
+
+    .cta-row {
+      margin: 22px 0 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Sticky top-right CTA: hidden until hero is off-screen */
+    .sticky-cta {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 9999;
+
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    body.show-sticky .sticky-cta {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Gentle “presence” effect on hover */
+    .sticky-cta .btn::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.10);
+      opacity: 0;
+      transform: scale(0.98);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .sticky-cta .btn:hover::before,
+    .sticky-cta .btn:focus::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .footer {
+      margin-top: 48px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: #888;
+      max-width: 70ch;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+
+    .footer strong { color: var(--text); }
+    .footer a { color: #333; text-decoration: none; }
+    .footer a:hover, .footer a:focus { text-decoration: underline; text-underline-offset: 3px; }
+
+    @media (max-width: 640px) {
+      .wrap { padding-top: 72px; }
+      .sticky-cta { top: 12px; right: 12px; }
+      .logo { width: min(235px, 78vw); } /* mobile scaled */
+      .btn { padding: 11px 16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sticky CTA (top-right) -->
+  <div class="sticky-cta">
+    <a class="btn" href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">Get in touch</a>
+  </div>
+
+  <main class="wrap">
+    <section class="hero" id="hero">
+      <img src="qtoc_logo.png" alt="QtoC Logo" class="logo" />
+
+      <h1>Accelerating Quote-to-Cash with People, Process, and Platforms</h1>
+
+      <p class="lead">
+        QtoC helps operators, founders, and leadership teams scale effectively in the age of AI by bringing structure and clarity to commercial and operational complexity.
+      </p>
+    </section>
+
+    <section class="content">
+      <p>
+        QtoC operates as a focused consultancy, working hands-on with leadership teams navigating growth, complexity, or transition. The work sits at the intersection of pricing, operations, and systems—where misalignment quietly erodes performance, margin, and trust.
+      </p>
+
+      <p>
+        QtoC works with a limited number of clients at a time to ensure depth, discretion, and measurable impact.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn" href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">Get in touch</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>
+        <strong>QtoC</strong><br />
+        A DBA of QtoC Group LLC<br />
+        <a href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">hello@qtoc.ai</a>
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var hero = document.getElementById("hero");
+      if (!hero || !("IntersectionObserver" in window)) {
+        // Fallback: show sticky after a small scroll
+        function toggle() {
+          document.body.classList.toggle("show-sticky", window.scrollY > 40);
+        }
+        window.addEventListener("scroll", toggle, { passive: true });
+        window.addEventListener("load", toggle);
+        toggle();
+        return;
+      }
+
+      var obs = new IntersectionObserver(function (entries) {
+        // Show sticky when hero is NOT intersecting (i.e., user has scrolled past it)
+        var isHeroVisible = entries[0] && entries[0].isIntersecting;
+        document.body.classList.toggle("show-sticky", !isHeroVisible);
+      }, { threshold: 0.05 });
+
+      obs.observe(hero);
+    })();
+  </script>
+</body>
+</html>
