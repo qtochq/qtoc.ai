@@ -1,239 +1,206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>QtoC | Accelerating Quote-to-Cash</title>
-  <meta name="description" content="QtoC is a focused consultancy bringing structure and clarity to quote-to-cash commercial and operational complexity." />
-
+  <title>QtoC</title>
   <style>
-    :root{
-      --ink:#111;
-      --text:#333;
-      --muted:#555;
-      --hair:#eee;
-      --gold:#C9A227;
-      --bg:#fff;
+    /* qtoc-edit: 2026-01-28 19:04:48 */
+
+    :root {
+      --ink: #111;
+      --muted: #555;
+      --gold: #c9a227;
+      --maxw: 1040px;
     }
 
-    *{ box-sizing:border-box; }
+    * { box-sizing: border-box; }
 
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-      line-height:1.6;
-      color:var(--text);
-      background:var(--bg);
-      padding:56px 24px;
-      opacity:0;
-      animation:fadeIn 520ms ease-out forwards;
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      body{ animation:none; opacity:1; }
-      .cta{ transition:none; }
-    }
-
-    @keyframes fadeIn{
-      from{ opacity:0; transform:translateY(6px); }
-      to{ opacity:1; transform:translateY(0); }
-    }
-
-    .page {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 56px 24px;
-}
-
-
-    /* HERO: logo + headline centered; subhead/paragraphs left-aligned */
-    .hero {
-  padding: 0;
-  margin: 0;
-}
-
-
-    .logo {
-  display: block;
-  margin: 0 auto 28px;
-  margin-left:auto;
-      margin-right:auto;
-      width:auto;
-      max-width: 265px;          /* bigger logo */
-      display:block;
-      margin: 0 auto 18px auto;  /* tighter spacing */
-    
-}
-
-
-    h1 {
-  text-align: left;
-  margin-left: 0;
-  margin-right: 0;
-  margin: 0 auto 16px auto;
-      max-width: 980px;
-      font-size: clamp(2.25rem, 4.1vw, 3.35rem);
-      line-height: 1.06;         /* tighter */
-      font-weight: 800;
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
-      letter-spacing: -0.035em;  /* micro-kerning pass */
-      word-spacing: -0.02em;
-    
-}
+      background: #fff;
+    }
 
+    /* Single horizontal constraint for EVERYTHING */
+    .page {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 96px 24px 64px;
+    }
 
-    .lead {
-  text-align: left;
-  max-width: none;
-  margin-left: 0;
-  margin-right: 0;
-  margin: 0 auto 26px auto;
-      max-width: 760px;
-      font-size: 1.22rem;
+    /* Subtle fade-in on load */
+    .page {
+      opacity: 0;
+      transform: translateY(6px);
+      animation: pageIn 520ms ease-out forwards;
+    }
+
+    @keyframes pageIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Logo centered, but within same constraint */
+    .logo {
+      display: block;
+      margin: 0 auto 40px;
+      max-width: 345px; /* ~15% larger than 300px baseline */
+      height: auto;
+    }
+
+    /* Headline: constrained by same container, left-aligned */
+    h1 {
+      margin: 0 0 22px 0;
+      font-size: clamp(33px, 4.2vw, 51px); /* ~3pt smaller vs prior */
+      line-height: 1.14;
+      letter-spacing: -0.02em; /* micro-kerning pass */
+      text-align: left;
+    }
+
+    /* Subhead: LEFT (not centered) */
+    .subhead {
+      margin: 0 0 28px 0;
+      font-size: 20px;
+      line-height: 1.6;
       color: var(--muted);
-      text-align: left;          /* IMPORTANT: not centered */
-    
-}
-
-
-    .content {
-  padding: 0;
-  margin: 0;
-}
-
-    .content p{
-      margin: 0 0 18px 0;
-      font-size: 1.08rem;
+      text-align: left;
+      max-width: 72ch;
     }
 
-    /* CTA button styles (shared for both buttons) */
-    .cta{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 14px 22px;
-      border-radius: 999px;
-      font-weight: 700;
-      text-decoration: none;
-      color: #fff;
-      background: #111;
-      border: 1px solid rgba(0,0,0,0.12);
-      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, color 160ms ease;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.10);
-      will-change: transform;
-    }
-    .cta:hover,
-    .cta:focus{
-      background: var(--gold);   /* Gold accent usage on hover */
-      color: #111;
-      transform: translateY(-2px);
-      box-shadow: 0 16px 34px rgba(0,0,0,0.14);
-      outline: none;
-    }
-    .cta:active{
-      transform: translateY(-1px);
+    /* Body copy aligned to same left edge */
+    .content p {
+      margin: 0 0 22px 0;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #222;
+      max-width: 78ch;
     }
 
-    /* Primary CTA centered under body */
-    .cta-wrap{
-      text-align:center;
+    /* CTA button (prominent) */
+    .cta-link {
+      display: inline-block;
       margin-top: 26px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+      box-shadow: 0 10px 28px rgba(0,0,0,.10);
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
     }
 
-    /* Sticky top-right CTA that stays while scrolling */
-    .cta-fixed{
+    .cta-link:hover {
+      background: var(--gold); /* gold accent on hover */
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px rgba(0,0,0,.16);
+    }
+
+    .cta-link:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 28px rgba(0,0,0,.10);
+    }
+
+    /* Sticky top-right CTA that stays during scroll */
+    .sticky-cta {
       position: fixed;
       top: 18px;
       right: 18px;
-      z-index: 9999;
-      padding: 12px 18px;
-      font-size: 0.98rem;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-6px);
+      z-index: 50;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(17,17,17,.92);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 650;
+      box-shadow: 0 10px 26px rgba(0,0,0,.16);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
     }
-    .cta-fixed.is-visible{
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-      transition: opacity 180ms ease, transform 180ms ease, box-shadow 160ms ease, background 160ms ease, color 160ms ease;
+
+    .sticky-cta:hover {
+      background: rgba(201,162,39,.95);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px rgba(0,0,0,.20);
+    }
+
+    /* Keep sticky CTA from crowding on very small screens */
+    @media (max-width: 520px) {
+      .page { padding-top: 84px; }
+      .sticky-cta { top: 12px; right: 12px; padding: 9px 14px; }
+      .logo { margin-bottom: 28px; max-width: 300px; }
     }
 
     /* Footer */
-    .footer{
-      margin-top: 56px;
-      padding-top: 18px;
-      border-top: 1px solid var(--hair);
-      font-size: 0.9rem;
-      color: #888;
-      max-width: 760px;
-      margin-left:auto;
-      margin-right:auto;
+    .divider {
+      margin: 56px 0 22px;
+      border: 0;
+      border-top: 1px solid rgba(0,0,0,.08);
     }
-    .footer strong{ color: var(--ink); }
-    .footer a{ color: #333; text-decoration:none; }
-    .footer a:hover{ text-decoration:underline; text-underline-offset:3px; }
 
-    @media (max-width: 640px){
-      body{ padding: 42px 18px; }
-      .logo{ max-width: 230px; margin-bottom: 14px; }
-      .cta-fixed{ top: 12px; right: 12px; }
+    .footer {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .footer strong {
+      display: inline-block;
+      margin-bottom: 4px;
+      color: #111;
+    }
+
+    .footer a {
+      color: #111;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
-
 <body>
-  <!-- Sticky CTA -->
-  <a class="cta cta-fixed" href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">Get in touch</a>
+  <a class="sticky-cta" href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">Get in touch</a>
 
-  <div class="page">
-    <div class="hero">
+  <main class="page">
+    <section class="hero">
       <img src="qtoc_logo.png" alt="QtoC Logo" class="logo" />
 
-      <h1>Accelerating Quote-to-Cash with People, Process, and Platforms</h1>
+      <h1>Accelerating Quote-to-Cash with People,<br/>Process, and Platforms</h1>
 
-      <p class="lead">
-        QtoC helps operators, founders, and leadership teams scale effectively in the age of AI by bringing structure and clarity to commercial and operational complexity.
-      </p>
-    </div>
-
-    <div class="content">
-      <p>
-        QtoC operates as a focused consultancy, working hands-on with leadership teams navigating growth, complexity, or transition. The work sits at the intersection of pricing, operations, and systems—where misalignment quietly erodes performance, margin, and trust.
+      <p class="subhead">
+        QtoC helps operators, founders, and leadership teams scale effectively in the age of AI by bringing
+        structure and clarity to commercial and operational complexity.
       </p>
 
-      <p>
-        QtoC works with a limited number of clients at a time to ensure depth, discretion, and measurable impact.
-      </p>
+      <div class="content">
+        <p>
+          QtoC operates as a focused consultancy, working hands-on with leadership teams navigating growth,
+          complexity, or transition. The work sits at the intersection of pricing, operations, and systems—where
+          misalignment quietly erodes performance, margin, and trust.
+        </p>
 
-      <div class="cta-wrap">
-        <a class="cta" href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">Get in touch</a>
+        <p>
+          QtoC works with a limited number of clients at a time to ensure depth, discretion, and measurable impact.
+        </p>
+
+        <a class="cta-link" href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">Get in touch</a>
       </div>
-    </div>
 
-    <div class="footer">
-      <p>
-        <strong>QtoC</strong><br />
-        A DBA of QtoC Group LLC<br />
-        <a href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">hello@qtoc.ai</a>
-      </p>
-    </div>
-  </div>
+      <hr class="divider" />
 
-  <script>
-    // Show the fixed CTA after a small scroll (keeps it subtle on load)
-    (function () {
-      var btn = document.querySelector('.cta-fixed');
-      function onScroll(){
-        if (window.scrollY > 40) btn.classList.add('is-visible');
-        else btn.classList.remove('is-visible');
-      }
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    })();
-  </script>
+      <div class="footer">
+        <p>
+          <strong>QtoC</strong><br />
+          A DBA of QtoC Group LLC<br />
+          <a href="mailto:hello@qtoc.ai">hello@qtoc.ai</a>
+        </p>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
