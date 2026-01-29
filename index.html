@@ -9,197 +9,169 @@
 
   <style>
     :root{
-      --text: #111;
-      --muted: #555;
-      --border: #eee;
-      --bg: #fff;
-      --shadow: 0 10px 30px rgba(0,0,0,0.08);
-      --shadowHover: 0 14px 40px rgba(0,0,0,0.12);
+      --ink:#111;
+      --text:#333;
+      --muted:#555;
+      --hair:#eee;
+      --gold:#C9A227;
+      --bg:#fff;
     }
 
-    * { box-sizing: border-box; }
+    *{ box-sizing:border-box; }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.6;
+      color:var(--text);
+      background:var(--bg);
+      padding:56px 24px;
+      opacity:0;
+      animation:fadeIn 520ms ease-out forwards;
     }
 
-    /* Safe fade-in (no "blank page" risk) */
-    body {
-      animation: pageFadeIn 520ms ease-out both;
-    }
-    @keyframes pageFadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce){
+      body{ animation:none; opacity:1; }
+      .cta{ transition:none; }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      body { animation: none !important; }
-      .btn { transition: none !important; }
-      .sticky-cta { transition: none !important; }
+    @keyframes fadeIn{
+      from{ opacity:0; transform:translateY(6px); }
+      to{ opacity:1; transform:translateY(0); }
     }
 
-    /* Layout */
-    .wrap {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 56px 22px 36px;
+    .container{
+      max-width:980px;
+      margin:0 auto;
+      position:relative;
     }
 
-    /* Center-align logo + hero block */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+    /* HERO: logo + headline centered; subhead/paragraphs left-aligned */
+    .hero{
+      text-align:center;
+      margin:0 auto;
     }
 
-    /* Logo +15% larger (responsive) */
-    .logo {
-      width: min(265px, 74vw); /* increased */
-      height: auto;
-      display: block;
-      margin: 6px 0 26px;
+    .logo{
+      width:auto;
+      max-width: 265px;          /* bigger logo */
+      display:block;
+      margin: 0 auto 18px auto;  /* tighter spacing */
     }
 
-    h1 {
-      margin: 0 0 16px;              /* slightly tighter */
-      font-size: clamp(2.05rem, 4.6vw, 3.05rem);
-      font-weight: 750;
-      letter-spacing: -0.03em;
-      line-height: 1.06;             /* tightened */
+    h1{
+      margin: 0 auto 16px auto;
+      max-width: 980px;
+      font-size: clamp(2.25rem, 4.1vw, 3.35rem);
+      line-height: 1.06;         /* tighter */
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.035em;  /* micro-kerning pass */
+      word-spacing: -0.02em;
     }
 
-    .lead {
-      margin: 0 auto 18px;
-      max-width: 54ch;
-      font-size: 1.18rem;
+    .lead{
+      margin: 0 auto 26px auto;
+      max-width: 760px;
+      font-size: 1.22rem;
       color: var(--muted);
+      text-align: left;          /* IMPORTANT: not centered */
     }
 
-    .content {
-      max-width: 70ch;
+    .content{
+      max-width: 760px;
       margin: 0 auto;
       text-align: left;
     }
-
-    .content p {
-      margin: 0 0 16px;
+    .content p{
+      margin: 0 0 18px 0;
       font-size: 1.08rem;
-      color: #333;
     }
 
-    /* Shared CTA button style (both CTAs identical) */
-    .btn {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 18px;
+    /* CTA button styles (shared for both buttons) */
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 14px 22px;
       border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.12);
-      background: #111;
-      color: #fff;
+      font-weight: 700;
       text-decoration: none;
-      font-weight: 650;
-      letter-spacing: -0.01em;
-      box-shadow: var(--shadow);
-      transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+      color: #fff;
+      background: #111;
+      border: 1px solid rgba(0,0,0,0.12);
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, color 160ms ease;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.10);
       will-change: transform;
     }
-
-    .btn:hover,
-    .btn:focus {
-      transform: translateY(-1px);
-      box-shadow: var(--shadowHover);
+    .cta:hover,
+    .cta:focus{
+      background: var(--gold);   /* Gold accent usage on hover */
+      color: #111;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(0,0,0,0.14);
       outline: none;
     }
-
-    .btn:active {
-      transform: translateY(0px);
-      opacity: 0.96;
+    .cta:active{
+      transform: translateY(-1px);
     }
 
-    .cta-row {
-      margin: 22px 0 0;
-      display: flex;
-      justify-content: center;
+    /* Primary CTA centered under body */
+    .cta-wrap{
+      text-align:center;
+      margin-top: 26px;
     }
 
-    /* Sticky top-right CTA: hidden until hero is off-screen */
-    .sticky-cta {
+    /* Sticky top-right CTA that stays while scrolling */
+    .cta-fixed{
       position: fixed;
       top: 18px;
       right: 18px;
       z-index: 9999;
-
+      padding: 12px 18px;
+      font-size: 0.98rem;
       opacity: 0;
-      transform: translateY(-6px);
       pointer-events: none;
-      transition: opacity 220ms ease, transform 220ms ease;
+      transform: translateY(-6px);
     }
-
-    body.show-sticky .sticky-cta {
+    .cta-fixed.is-visible{
       opacity: 1;
-      transform: translateY(0);
       pointer-events: auto;
+      transform: translateY(0);
+      transition: opacity 180ms ease, transform 180ms ease, box-shadow 160ms ease, background 160ms ease, color 160ms ease;
     }
 
-    /* Gentle “presence” effect on hover */
-    .sticky-cta .btn::before {
-      content: "";
-      position: absolute;
-      inset: -10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.10);
-      opacity: 0;
-      transform: scale(0.98);
-      transition: opacity 220ms ease, transform 220ms ease;
-    }
-
-    .sticky-cta .btn:hover::before,
-    .sticky-cta .btn:focus::before {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .footer {
-      margin-top: 48px;
+    /* Footer */
+    .footer{
+      margin-top: 56px;
       padding-top: 18px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--hair);
       font-size: 0.9rem;
       color: #888;
-      max-width: 70ch;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: left;
+      max-width: 760px;
+      margin-left:auto;
+      margin-right:auto;
     }
+    .footer strong{ color: var(--ink); }
+    .footer a{ color: #333; text-decoration:none; }
+    .footer a:hover{ text-decoration:underline; text-underline-offset:3px; }
 
-    .footer strong { color: var(--text); }
-    .footer a { color: #333; text-decoration: none; }
-    .footer a:hover, .footer a:focus { text-decoration: underline; text-underline-offset: 3px; }
-
-    @media (max-width: 640px) {
-      .wrap { padding-top: 72px; }
-      .sticky-cta { top: 12px; right: 12px; }
-      .logo { width: min(235px, 78vw); } /* mobile scaled */
-      .btn { padding: 11px 16px; }
+    @media (max-width: 640px){
+      body{ padding: 42px 18px; }
+      .logo{ max-width: 230px; margin-bottom: 14px; }
+      .cta-fixed{ top: 12px; right: 12px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Sticky CTA (top-right) -->
-  <div class="sticky-cta">
-    <a class="btn" href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">Get in touch</a>
-  </div>
+  <!-- Sticky CTA -->
+  <a class="cta cta-fixed" href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">Get in touch</a>
 
-  <main class="wrap">
-    <section class="hero" id="hero">
+  <div class="container">
+    <div class="hero">
       <img src="qtoc_logo.png" alt="QtoC Logo" class="logo" />
 
       <h1>Accelerating Quote-to-Cash with People, Process, and Platforms</h1>
@@ -207,9 +179,9 @@
       <p class="lead">
         QtoC helps operators, founders, and leadership teams scale effectively in the age of AI by bringing structure and clarity to commercial and operational complexity.
       </p>
-    </section>
+    </div>
 
-    <section class="content">
+    <div class="content">
       <p>
         QtoC operates as a focused consultancy, working hands-on with leadership teams navigating growth, complexity, or transition. The work sits at the intersection of pricing, operations, and systems—where misalignment quietly erodes performance, margin, and trust.
       </p>
@@ -218,41 +190,30 @@
         QtoC works with a limited number of clients at a time to ensure depth, discretion, and measurable impact.
       </p>
 
-      <div class="cta-row">
-        <a class="btn" href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">Get in touch</a>
+      <div class="cta-wrap">
+        <a class="cta" href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">Get in touch</a>
       </div>
-    </section>
+    </div>
 
-    <footer class="footer">
+    <div class="footer">
       <p>
         <strong>QtoC</strong><br />
         A DBA of QtoC Group LLC<br />
         <a href="mailto:hello@qtoc.ai?subject=Intro%20via%20QtoC">hello@qtoc.ai</a>
       </p>
-    </footer>
-  </main>
+    </div>
+  </div>
 
   <script>
+    // Show the fixed CTA after a small scroll (keeps it subtle on load)
     (function () {
-      var hero = document.getElementById("hero");
-      if (!hero || !("IntersectionObserver" in window)) {
-        // Fallback: show sticky after a small scroll
-        function toggle() {
-          document.body.classList.toggle("show-sticky", window.scrollY > 40);
-        }
-        window.addEventListener("scroll", toggle, { passive: true });
-        window.addEventListener("load", toggle);
-        toggle();
-        return;
+      var btn = document.querySelector('.cta-fixed');
+      function onScroll(){
+        if (window.scrollY > 40) btn.classList.add('is-visible');
+        else btn.classList.remove('is-visible');
       }
-
-      var obs = new IntersectionObserver(function (entries) {
-        // Show sticky when hero is NOT intersecting (i.e., user has scrolled past it)
-        var isHeroVisible = entries[0] && entries[0].isIntersecting;
-        document.body.classList.toggle("show-sticky", !isHeroVisible);
-      }, { threshold: 0.05 });
-
-      obs.observe(hero);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
     })();
   </script>
 </body>
